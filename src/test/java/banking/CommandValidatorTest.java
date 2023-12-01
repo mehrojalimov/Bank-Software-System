@@ -1,3 +1,5 @@
+package banking;
+
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -23,7 +25,7 @@ public class CommandValidatorTest {
 	@Test
 	void duplicate_unique_id_is_invalid() {
 		bank.addCheckingAccount(12345678, 2.5);
-		boolean actual = commandValidator.validate("create Checking 12345678 2.2");
+		boolean actual = commandValidator.validate("create banking.Checking 12345678 2.2");
 		assertFalse(actual);
 	}
 

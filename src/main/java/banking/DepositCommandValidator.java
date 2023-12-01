@@ -1,3 +1,5 @@
+package banking;
+
 public class DepositCommandValidator extends CommandValidationProcessor {
 
 	public DepositCommandValidator(Bank bank) {

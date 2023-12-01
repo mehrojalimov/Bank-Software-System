@@ -1,3 +1,5 @@
+package banking;
+
 public abstract class CommandValidationProcessor {
 
 	protected final Bank bank;
