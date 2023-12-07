@@ -1,12 +1,11 @@
 package banking;
 
-public class DepositCommandValidator extends CommandValidationProcessor {
+public class DepositCommandValidator extends CommandValidator {
 
 	public DepositCommandValidator(Bank bank) {
 		super(bank);
 	}
 
-	@Override
 	public boolean validateCommand(String[] parts) {
 		return parts.length == 3 && bank.accountExistsByUniqueID(getAccountId(parts[1]))
 				&& isInDepositLimit(parts[1], parts[2]);

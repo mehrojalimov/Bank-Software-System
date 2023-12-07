@@ -1,12 +1,11 @@
 package banking;
 
-public class CreateCommandValidator extends CommandValidationProcessor {
+public class CreateCommandValidator extends CommandValidator {
 
 	public CreateCommandValidator(Bank bank) {
 		super(bank);
 	}
 
-	@Override
 	public boolean validateCommand(String[] parts) {
 		return parts.length >= 4 && !doesAccountExist(parts[2]) && hasValidFormat(parts);
 	}

@@ -2,7 +2,7 @@ package banking;
 
 public class CommandValidator {
 
-	private final Bank bank;
+	protected Bank bank;
 
 	public CommandValidator(Bank bank) {
 		this.bank = bank;
@@ -12,19 +12,21 @@ public class CommandValidator {
 		String[] parts = command.split(" ");
 		String accountCommand = parts[0].toLowerCase();
 
-		CommandValidationProcessor processor = null;
+		CreateCommandValidator create;
+		DepositCommandValidator deposit;
+		WithdrawCommandValidator withdraw;
 
 		switch (accountCommand) {
 		case "create":
-			processor = new CreateCommandValidator(bank);
-			break;
+			create = new CreateCommandValidator(bank);
+			return create.validateCommand(parts);
 		case "deposit":
-			processor = new DepositCommandValidator(bank);
-			break;
+			deposit = new DepositCommandValidator(bank);
+			return deposit.validateCommand(parts);
 		case "withdraw":
-			processor = new WithdrawCommandValidator(bank);
+			withdraw = new WithdrawCommandValidator(bank);
+			return withdraw.validateCommand(parts);
 		}
-
-		return processor != null && processor.validateCommand(parts);
+		return false;
 	}
 }

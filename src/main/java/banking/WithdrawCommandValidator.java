@@ -1,12 +1,11 @@
 package banking;
 
-public class WithdrawCommandValidator extends CommandValidationProcessor {
+public class WithdrawCommandValidator extends CommandValidator {
 
 	public WithdrawCommandValidator(Bank bank) {
 		super(bank);
 	}
 
-	@Override
 	public boolean validateCommand(String[] parts) {
 		return parts.length == 3 && bank.accountExistsByUniqueID(getAccountId(parts[1]))
 				&& bank.retrieveAccount(Integer.parseInt(parts[1])).isInValidMaximumRange(Integer.parseInt(parts[2]))
