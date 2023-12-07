@@ -6,4 +6,9 @@ public class Checking extends Account {
 		super(accountType, uniqueId, apr);
 	}
 
+	@Override
+	public boolean isInValidMaximumRange(int amount) {
+		return amount <= 1000 && amount >= 0;
+	}
+
 }

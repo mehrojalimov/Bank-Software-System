@@ -210,4 +210,41 @@ public class CommandValidatorTest {
 		boolean actual = commandValidator.validate("create checking 12345678 1.1");
 		assertFalse(actual);
 	}
+
+	@Test
+	void withdrawing_300_dollars_from_an_saving_account_is_valid() {
+		bank.addSavingAccount(12345678, 2.2);
+		bank.deposit(12345678, 1500);
+		boolean actual = commandValidator.validate("withdraw 12345678 300");
+		assertTrue(actual);
+	}
+
+	@Test
+	void withdrawing_money_over_the_saving_limit_is_invalid() {
+		bank.addSavingAccount(11111111, 3.3);
+		bank.deposit(11111111, 700);
+		bank.deposit(11111111, 700);
+
+		boolean actual = commandValidator.validate("withdraw 11111111 1100");
+		assertFalse(actual);
+	}
+
+	@Test
+	void withdrawing_399_dollars_from_checking_limit_is_valid() {
+		bank.addCheckingAccount(12345678, 2.3);
+		bank.deposit(12345678, 900);
+
+		boolean actual = commandValidator.validate("withdraw 12345678 399");
+		assertTrue(actual);
+	}
+
+	@Test
+	void withdrawing_401_dollars_that_is_over_the_withdraw_limit_is_invalid() {
+		bank.addCheckingAccount(12345678, 3.6);
+		bank.deposit(12345678, 5.3);
+
+		boolean actual = commandValidator.validate("WWithdraw 12345678 401");
+		assertFalse(actual);
+	}
+
 }

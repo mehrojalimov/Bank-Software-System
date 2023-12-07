@@ -57,4 +57,6 @@ public abstract class Account {
 		return ACCOUNT_TYPE;
 	}
 
+	public abstract boolean isInValidMaximumRange(int amount);
+
 }

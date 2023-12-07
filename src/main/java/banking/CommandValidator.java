@@ -21,6 +21,8 @@ public class CommandValidator {
 		case "deposit":
 			processor = new DepositCommandValidator(bank);
 			break;
+		case "withdraw":
+			processor = new WithdrawCommandValidator(bank);
 		}
 
 		return processor != null && processor.validateCommand(parts);
