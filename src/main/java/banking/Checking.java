@@ -8,7 +8,7 @@ public class Checking extends Account {
 
 	@Override
 	public boolean isInMaxWithdrawLimit(double amount) {
-		return amount <= 1000 && amount >= 0;
+		return amount <= 400 && amount >= 0;
 	}
 
 	@Override
