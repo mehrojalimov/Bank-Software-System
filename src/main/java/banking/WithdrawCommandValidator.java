@@ -8,9 +8,24 @@ public class WithdrawCommandValidator extends CommandValidator {
 
 	public boolean validateCommand(String[] parts) {
 		return parts.length == 3 && bank.accountExistsByUniqueID(getAccountId(parts[1]))
-				&& bank.retrieveAccount(Integer.parseInt(parts[1])).isInValidMaximumRange(Integer.parseInt(parts[2]))
+				&& isInValidMaximumRange(parts[1], parts[2])
 
 				&& isIncorrectPassTime(parts[1]);
+	}
+
+	private boolean isInValidMaximumRange(String uniqueId, String depositAmountStr) {
+		try {
+			int accountId = Integer.parseInt(uniqueId);
+			Account account = bank.retrieveAccount(accountId);
+
+			if (account != null) {
+				double depositAmount = Double.parseDouble(depositAmountStr);
+				return account.isInMaxWithdrawLimit(depositAmount);
+			}
+		} catch (NumberFormatException e) {
+			return false;
+		}
+		return false;
 	}
 
 	private boolean isIncorrectPassTime(String uniqueId) {

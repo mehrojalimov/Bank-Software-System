@@ -7,7 +7,12 @@ public class Saving extends Account {
 	}
 
 	@Override
-	public boolean isInValidMaximumRange(int amount) {
+	public boolean isInMaxWithdrawLimit(double amount) {
 		return amount <= 400 && amount >= 0;
+	}
+
+	@Override
+	public boolean isInMaxDepositLimit(double amount) {
+		return amount <= 2500 && amount >= 0;
 	}
 }

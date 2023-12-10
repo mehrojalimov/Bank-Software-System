@@ -21,12 +21,9 @@ public class DepositCommandValidator extends CommandValidator {
 			Account account = bank.retrieveAccount(accountId);
 
 			if (account != null) {
-				String accountType = account.getAccountType().toLowerCase();
 				double depositAmount = Double.parseDouble(depositAmountStr);
 
-				double depositLimit = getDepositLimitForAccountType(accountType);
-
-				return depositAmount <= depositLimit && depositAmount >= 0;
+				return account.isInMaxDepositLimit(depositAmount);
 			}
 		} catch (NumberFormatException e) {
 			return false;
@@ -35,14 +32,4 @@ public class DepositCommandValidator extends CommandValidator {
 		return false;
 	}
 
-	private double getDepositLimitForAccountType(String accountType) {
-		switch (accountType) {
-		case "saving":
-			return 2500;
-		case "checking":
-			return 1000;
-		default:
-			return -1;
-		}
-	}
 }

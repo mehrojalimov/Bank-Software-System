@@ -57,6 +57,8 @@ public abstract class Account {
 		return ACCOUNT_TYPE;
 	}
 
-	public abstract boolean isInValidMaximumRange(int amount);
+	public abstract boolean isInMaxWithdrawLimit(double amount);
+
+	public abstract boolean isInMaxDepositLimit(double amount);
 
 }

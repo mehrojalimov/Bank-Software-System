@@ -7,7 +7,12 @@ public class Checking extends Account {
 	}
 
 	@Override
-	public boolean isInValidMaximumRange(int amount) {
+	public boolean isInMaxWithdrawLimit(double amount) {
+		return amount <= 1000 && amount >= 0;
+	}
+
+	@Override
+	public boolean isInMaxDepositLimit(double amount) {
 		return amount <= 1000 && amount >= 0;
 	}
 
