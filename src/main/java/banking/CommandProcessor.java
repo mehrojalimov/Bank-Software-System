@@ -19,6 +19,10 @@ public class CommandProcessor {
 		case "deposit":
 			new DepositCommandProcessor(bank).processCommand(parts);
 			break;
+
+		case "withdraw":
+			new WithdrawCommandProcessor(bank).processCommand(parts);
+			break;
 		}
 	}
 }
