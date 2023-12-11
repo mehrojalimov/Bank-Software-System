@@ -6,33 +6,33 @@ public class WithdrawCommandValidator extends CommandValidator {
 		super(bank);
 	}
 
+	// withdraw 11111111 200
+
 	public boolean validateCommand(String[] parts) {
-		return parts.length == 3 && bank.accountExistsByUniqueID(getAccountId(parts[1]))
-				&& isInValidMaximumRange(parts[1], parts[2])
-
-				&& isIncorrectPassTime(parts[1]);
-	}
-
-	private boolean isInValidMaximumRange(String uniqueId, String depositAmountStr) {
 		try {
-			int accountId = Integer.parseInt(uniqueId);
-			Account account = bank.retrieveAccount(accountId);
-
-			if (account != null) {
-				double depositAmount = Double.parseDouble(depositAmountStr);
-				return account.isInMaxWithdrawLimit(depositAmount);
+			if (parts.length != 3) {
+				return false;
 			}
-		} catch (NumberFormatException e) {
+
+			int account = Integer.parseInt(parts[1]);
+			double amount = Double.parseDouble(parts[2]);
+
+			return isInValidMaximumRange(account, amount) && isTheCorrectAccount(account)
+					&& isIncorrectPassTime(account);
+		} catch (Exception e) {
 			return false;
 		}
-		return false;
 	}
 
-	private boolean isIncorrectPassTime(String uniqueId) {
+	private boolean isTheCorrectAccount(int uniqueId) {
+		return (uniqueId <= 99999999 && uniqueId >= 10000000) && bank.accountExistsByUniqueID(uniqueId);
+	}
+
+	private boolean isInValidMaximumRange(int uniqueId, double amount) {
+		return bank.retrieveAccount(uniqueId).isInMaxWithdrawLimit(amount);
+	}
+
+	private boolean isIncorrectPassTime(int uniqueId) {
 		return true;
-	}
-
-	private int getAccountId(String uniqueId) {
-		return Integer.parseInt(uniqueId);
 	}
 }

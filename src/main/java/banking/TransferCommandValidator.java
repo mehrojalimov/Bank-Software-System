@@ -8,13 +8,17 @@ public class TransferCommandValidator extends CommandValidator {
 
 	public boolean validateCommand(String[] parts) {
 		try {
+			if (parts.length != 4) {
+				return false;
+			}
+
 			int accountOne = Integer.parseInt(parts[1]);
 			int accountTwo = Integer.parseInt(parts[2]);
 			double amount = Double.parseDouble(parts[3]);
 
 			return usesTransferOperation(accountOne, accountTwo) && doAccountsExist(accountOne, accountTwo)
-					&& isInTransferLimit(accountOne, accountTwo, amount) && (parts.length == 4);
-		} catch (NumberFormatException e) {
+					&& isInTransferLimit(accountOne, accountTwo, amount);
+		} catch (Exception e) {
 			return false;
 		}
 	}

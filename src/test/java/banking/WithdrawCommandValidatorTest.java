@@ -127,4 +127,18 @@ public class WithdrawCommandValidatorTest {
 		assertFalse(actual);
 	}
 
+	@Test
+	void withdrawing_to_id_with_letters_is_invalid() {
+		boolean actual = commandValidator.validate("withdraw 1234567a 200");
+
+		assertFalse(actual);
+	}
+
+	@Test
+	void withdrawing_amount_with_letters_into_account_is_invalid() {
+		boolean actual = commandValidator.validate("withdraw 12345678 10a");
+
+		assertFalse(actual);
+	}
+
 }
