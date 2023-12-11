@@ -1,5 +1,9 @@
 package banking;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+
 public abstract class Account {
 
 	private final double APR;
@@ -7,11 +11,15 @@ public abstract class Account {
 	private final String ACCOUNT_TYPE;
 	private double balance;
 	private int PASS_TIME = 0;
+	private int LAST_WITHDRAW_MONTH = -1;
+	private ArrayList<String> validCommands;
 
 	public Account(String ACCOUNT_TYPE, int UNIQUE_ID, double APR) {
 		this.APR = APR;
 		this.UNIQUE_ID = UNIQUE_ID;
 		this.ACCOUNT_TYPE = ACCOUNT_TYPE;
+		this.validCommands = new ArrayList<>();
+		this.validCommands.add(currentState());
 	}
 
 	public Account(String ACCOUNT_TYPE, int UNIQUE_ID, double APR, double balance) {
@@ -19,6 +27,8 @@ public abstract class Account {
 		this.balance = balance;
 		this.UNIQUE_ID = UNIQUE_ID;
 		this.ACCOUNT_TYPE = ACCOUNT_TYPE;
+		this.validCommands = new ArrayList<>();
+
 	}
 
 	public double getBalance() {
@@ -85,5 +95,32 @@ public abstract class Account {
 			double newBalance = (getBalance() * decimalAprPerMonth) + getBalance();
 			setBalance(newBalance);
 		}
+	}
+
+	int getLastWithdrawMonth() {
+		return LAST_WITHDRAW_MONTH;
+	}
+
+	void setLastMonthWithdrawMonth(int newMonth) {
+		LAST_WITHDRAW_MONTH = newMonth;
+	}
+
+	public void addValidCommand(String command) {
+		validCommands.add(command);
+	}
+
+	public String currentState() {
+		DecimalFormat decimalFormat = new DecimalFormat("0.00");
+		decimalFormat.setRoundingMode(RoundingMode.FLOOR);
+		String myString;
+		myString = getAccountType() + " " + getUNIQUE_ID() + " " + decimalFormat.format(getBalance()) + " "
+				+ decimalFormat.format(getAPR());
+
+		return myString;
+	}
+
+	public ArrayList<String> getValidCommands() {
+		this.validCommands.set(0, currentState());
+		return this.validCommands;
 	}
 }

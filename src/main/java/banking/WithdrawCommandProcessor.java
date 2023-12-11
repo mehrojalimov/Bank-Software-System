@@ -13,5 +13,6 @@ public class WithdrawCommandProcessor {
 		double amount = Double.parseDouble(parts[2]);
 
 		bank.withdraw(uniqueId, amount);
+
 	}
 }

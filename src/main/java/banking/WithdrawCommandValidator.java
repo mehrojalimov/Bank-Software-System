@@ -17,8 +17,7 @@ public class WithdrawCommandValidator extends CommandValidator {
 			int account = Integer.parseInt(parts[1]);
 			double amount = Double.parseDouble(parts[2]);
 
-			return isInValidMaximumRange(account, amount) && isTheCorrectAccount(account)
-					&& isIncorrectPassTime(account);
+			return isInValidMaximumRange(account, amount) && isTheCorrectAccount(account);
 		} catch (Exception e) {
 			return false;
 		}
@@ -30,9 +29,5 @@ public class WithdrawCommandValidator extends CommandValidator {
 
 	private boolean isInValidMaximumRange(int uniqueId, double amount) {
 		return bank.retrieveAccount(uniqueId).isInMaxWithdrawLimit(amount);
-	}
-
-	private boolean isIncorrectPassTime(int uniqueId) {
-		return true;
 	}
 }

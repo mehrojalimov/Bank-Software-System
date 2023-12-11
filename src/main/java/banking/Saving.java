@@ -2,18 +2,8 @@ package banking;
 
 public class Saving extends Account {
 
-	private int LAST_WITHDRAW_MONTH = -1;
-
 	public Saving(String accountType, int uniqueId, double apr) {
 		super(accountType, uniqueId, apr);
-	}
-
-	int getLastWithdrawMonth() {
-		return LAST_WITHDRAW_MONTH;
-	}
-
-	void setLastMonthWithdrawMonth(int newMonth) {
-		LAST_WITHDRAW_MONTH = newMonth;
 	}
 
 	@Override

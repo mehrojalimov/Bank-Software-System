@@ -39,6 +39,7 @@ public class Bank {
 	public void withdraw(int uniqueId, double money) {
 		Account account = retrieveAccount(uniqueId);
 		account.withdraw(money);
+		account.setLastMonthWithdrawMonth(account.getPassTime());
 	}
 
 	public boolean accountExistsByUniqueID(int quickId) {
@@ -59,5 +60,11 @@ public class Bank {
 			account.calculateApr(months);
 			account.setPassTime(months);
 		}
+	}
+
+	public void addActivity(String id, String command) {
+		int uniqueId = Integer.parseInt(id);
+		String proper = command.substring(0, 1).toUpperCase() + command.substring(1).toLowerCase();
+		retrieveAccount(uniqueId).addValidCommand(proper);
 	}
 }

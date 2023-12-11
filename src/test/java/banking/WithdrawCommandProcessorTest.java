@@ -68,4 +68,12 @@ public class WithdrawCommandProcessorTest {
 		assertEquals(0, bank.retrieveAccount(22222222).getBalance());
 	}
 
+	@Test
+	void withdrawing_money_from_saving() {
+		commandProcessor.process("deposit 22222222 1500");
+		commandProcessor.process("withdraw 22222222 600");
+
+		assertEquals(900, bank.retrieveAccount(22222222).getBalance());
+	}
+
 }

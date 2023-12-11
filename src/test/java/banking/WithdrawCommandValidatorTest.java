@@ -143,4 +143,40 @@ public class WithdrawCommandValidatorTest {
 		assertFalse(actual);
 	}
 
+	@Test
+	void withdrawing_from_saving_twice_at_the_same_month_is_invalid() {
+		bank.withdraw(12345678, 500);
+		boolean actual = commandValidator.validate("withdraw 12345678 600");
+
+		assertFalse(actual);
+	}
+
+	@Test
+	void withdrawing_from_saving_twice_between_one_month_after_is_valid() {
+		bank.withdraw(12345678, 500);
+		bank.retrieveAccount(12345678).setPassTime(1);
+
+		boolean actual = commandValidator.validate("withdraw 12345678 600");
+
+		assertTrue(actual);
+	}
+
+	@Test
+	void withdrawing_from_checking_twice_is_valid() {
+		bank.withdraw(77777777, 250);
+
+		boolean actual = commandValidator.validate("withdraw 77777777 250");
+
+		assertTrue(actual);
+	}
+
+	@Test
+	void withdrawing_money_cd_when_12_months_not_passed_is_invalid() {
+		bank.retrieveAccount(88888888).setPassTime(9);
+
+		boolean actual = commandValidator.validate("withdraw 88888888 5000");
+
+		assertFalse(actual);
+	}
+
 }
