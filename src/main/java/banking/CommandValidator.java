@@ -15,6 +15,7 @@ public class CommandValidator {
 		CreateCommandValidator create;
 		DepositCommandValidator deposit;
 		WithdrawCommandValidator withdraw;
+		TransferCommandValidator transfer;
 
 		switch (accountCommand) {
 		case "create":
@@ -26,7 +27,11 @@ public class CommandValidator {
 		case "withdraw":
 			withdraw = new WithdrawCommandValidator(bank);
 			return withdraw.validateCommand(parts);
+		case "transfer":
+			transfer = new TransferCommandValidator(bank);
+			return transfer.validateCommand(parts);
 		}
 		return false;
+
 	}
 }

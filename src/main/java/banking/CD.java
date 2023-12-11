@@ -15,4 +15,9 @@ public class CD extends Account {
 	public boolean isInMaxDepositLimit(double amount) {
 		return false;
 	}
+
+	@Override
+	public boolean acceptsTransfer() {
+		return false;
+	}
 }

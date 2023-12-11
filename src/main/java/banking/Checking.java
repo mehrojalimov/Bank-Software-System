@@ -16,4 +16,9 @@ public class Checking extends Account {
 		return amount <= 1000 && amount >= 0;
 	}
 
+	@Override
+	public boolean acceptsTransfer() {
+		return true;
+	}
+
 }

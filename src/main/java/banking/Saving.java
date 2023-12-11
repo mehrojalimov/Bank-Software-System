@@ -15,4 +15,9 @@ public class Saving extends Account {
 	public boolean isInMaxDepositLimit(double amount) {
 		return amount <= 2500 && amount >= 0;
 	}
+
+	@Override
+	public boolean acceptsTransfer() {
+		return true;
+	}
 }
