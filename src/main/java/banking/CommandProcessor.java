@@ -23,6 +23,10 @@ public class CommandProcessor {
 		case "withdraw":
 			new WithdrawCommandProcessor(bank).processCommand(parts);
 			break;
+
+		case "transfer":
+			new TransferCommandProcessor(bank).processCommand(parts);
+			break;
 		}
 	}
 }

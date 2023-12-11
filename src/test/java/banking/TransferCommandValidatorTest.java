@@ -112,14 +112,14 @@ public class TransferCommandValidatorTest {
 
 	@Test
 	void transferring_to_the_negative_account_is_invalid() {
-		boolean actual = commandValidator.validate("transfer 22222222 -11111111 600");
+		boolean actual = commandValidator.validate("transfer 22222222 -11111111 100");
 
 		assertFalse(actual);
 	}
 
 	@Test
 	void transferring_from_negative_account_is_invalid() {
-		boolean actual = commandValidator.validate("transferring -11111111 22222222 500");
+		boolean actual = commandValidator.validate("transferring -11111111 22222222 100");
 
 		assertFalse(actual);
 	}
@@ -150,6 +150,63 @@ public class TransferCommandValidatorTest {
 		boolean actual = commandValidator.validate("transfer 11111110 22222220 20a");
 
 		assertFalse(actual);
+	}
+
+	@Test
+	void transferring_money_from_the_over_the_limit_of_saving_is_invalid() {
+		bank.deposit(11111111, 900);
+		boolean actual = commandValidator.validate("transfer 11111111 22222222 1100");
+
+		assertFalse(actual);
+	}
+
+	@Test
+	void transferring_from_over_limit_of_checking_account_is_invalid() {
+		boolean actual = commandValidator.validate("transfer 22222222 11111111 500");
+
+		assertFalse(actual);
+	}
+
+	@Test
+	void transferring_from_saving_to_the_exact_limit_of_checking_is_invalid() {
+		boolean actual = commandValidator.validate("transfer 11111111 22222220 1000");
+
+		assertTrue(actual);
+	}
+
+	@Test
+	void transferring_money_with_mixed_command_is_invalid() {
+		boolean actual = commandValidator.validate("11111111 transfer 22222222 300");
+
+		assertFalse(actual);
+	}
+
+	@Test
+	void transferring_from_non_existing_account_is_invalid() {
+		boolean actual = commandValidator.validate("transfer 12345677 11111111 255");
+
+		assertFalse(actual);
+	}
+
+	@Test
+	void transferring_to_non_existing_account_is_invalid() {
+		boolean actual = commandValidator.validate("transfer 11111111 12345679 155");
+
+		assertFalse(actual);
+	}
+
+	@Test
+	void transferring_money_with_typo_in_the_name_of_transfer_is_invalid() {
+		boolean actual = commandValidator.validate("transfe 11111111 2222222 33");
+
+		assertFalse(actual);
+	}
+
+	@Test
+	void transferring_zero_amount_is_valid() {
+		boolean actual = commandValidator.validate("transfer 11111111 22222222 0");
+
+		assertTrue(actual);
 	}
 
 }

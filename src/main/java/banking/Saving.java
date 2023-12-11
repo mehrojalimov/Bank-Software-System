@@ -20,4 +20,9 @@ public class Saving extends Account {
 	public boolean acceptsTransfer() {
 		return true;
 	}
+
+	@Override
+	public double getTransferAmount(double amount) {
+		return Math.min(amount, getBalance());
+	}
 }

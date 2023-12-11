@@ -62,4 +62,6 @@ public abstract class Account {
 	public abstract boolean isInMaxDepositLimit(double amount);
 
 	public abstract boolean acceptsTransfer();
+
+	public abstract double getTransferAmount(double amount);
 }

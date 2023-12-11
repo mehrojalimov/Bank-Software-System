@@ -20,4 +20,9 @@ public class CD extends Account {
 	public boolean acceptsTransfer() {
 		return false;
 	}
+
+	@Override
+	public double getTransferAmount(double amount) {
+		return 0;
+	}
 }

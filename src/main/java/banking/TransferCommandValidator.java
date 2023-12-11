@@ -16,7 +16,7 @@ public class TransferCommandValidator extends CommandValidator {
 			int accountTwo = Integer.parseInt(parts[2]);
 			double amount = Double.parseDouble(parts[3]);
 
-			return usesTransferOperation(accountOne, accountTwo) && doAccountsExist(accountOne, accountTwo)
+			return usesTransferOperation(accountOne, accountTwo) && areValidAccounts(accountOne, accountTwo)
 					&& isInTransferLimit(accountOne, accountTwo, amount);
 		} catch (Exception e) {
 			return false;
@@ -27,8 +27,9 @@ public class TransferCommandValidator extends CommandValidator {
 		return bank.retrieveAccount(accountOne).acceptsTransfer() && bank.retrieveAccount(accountTwo).acceptsTransfer();
 	}
 
-	private boolean doAccountsExist(int account1, int account2) {
-		return bank.accountExistsByUniqueID(account1) && bank.accountExistsByUniqueID(account2);
+	private boolean areValidAccounts(int account1, int account2) {
+		return bank.accountExistsByUniqueID(account1) && bank.accountExistsByUniqueID(account2)
+				&& (account1 != account2);
 	}
 
 	private boolean isInTransferLimit(int account1, int account2, double amount) {

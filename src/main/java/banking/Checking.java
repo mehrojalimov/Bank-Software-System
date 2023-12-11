@@ -21,4 +21,9 @@ public class Checking extends Account {
 		return true;
 	}
 
+	@Override
+	public double getTransferAmount(double amount) {
+		return Math.min(amount, getBalance());
+	}
+
 }
