@@ -4,13 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CommandStorage {
-	private List<String> invalidCommands;
-	private ArrayList<String> validCommands;
-	private Bank bank;
+	private final List<String> invalidCommands;
+	private final ArrayList<String> validCommands;
+	private final Bank bank;
 
-	public CommandStorage() {
+	public CommandStorage(Bank bank) {
 		this.invalidCommands = new ArrayList<>();
 		this.validCommands = new ArrayList<>();
+		this.bank = bank;
 	}
 
 	public void addInvalidCommand(String command) {
@@ -35,8 +36,8 @@ public class CommandStorage {
 			String[] arrayCommand = command.split(" ");
 			if (arrayCommand[0].equalsIgnoreCase("create")) {
 				int uniqueId = Integer.parseInt(arrayCommand[2]);
-				Account account = this.bank.retrieveAccount(uniqueId);
-				if (account != null) {
+				if (bank.accountExistsByUniqueID(uniqueId)) {
+					Account account = this.bank.retrieveAccount(uniqueId);
 					doReturn.addAll(account.getValidCommands());
 				}
 			}

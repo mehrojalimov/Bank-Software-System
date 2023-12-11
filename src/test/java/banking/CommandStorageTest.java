@@ -12,7 +12,7 @@ public class CommandStorageTest {
 
 	@BeforeEach
 	void setUp() {
-		commandStorage = new CommandStorage();
+		commandStorage = new CommandStorage(new Bank());
 	}
 
 	@Test

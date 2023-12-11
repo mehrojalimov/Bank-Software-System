@@ -19,6 +19,7 @@ public class MasterControl {
 		for (String command : input) {
 			if (commandValidator.validate(command)) {
 				commandProcessor.process(command);
+				commandStorage.addValidCommand(command);
 			} else {
 				commandStorage.addInvalidCommand(command);
 			}

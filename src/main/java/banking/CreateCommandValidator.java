@@ -46,7 +46,7 @@ public class CreateCommandValidator extends CommandValidator {
 			int accountId = getAccountId(uniqueId);
 			return bank.accountExistsByUniqueID(accountId);
 		} catch (NumberFormatException e) {
-			return false;
+			return true;
 		}
 	}
 

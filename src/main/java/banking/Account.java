@@ -9,10 +9,10 @@ public abstract class Account {
 	private final double APR;
 	private final int UNIQUE_ID;
 	private final String ACCOUNT_TYPE;
+	private final ArrayList<String> validCommands;
 	private double balance;
 	private int PASS_TIME = 0;
 	private int LAST_WITHDRAW_MONTH = -1;
-	private ArrayList<String> validCommands;
 
 	public Account(String ACCOUNT_TYPE, int UNIQUE_ID, double APR) {
 		this.APR = APR;
@@ -28,7 +28,12 @@ public abstract class Account {
 		this.UNIQUE_ID = UNIQUE_ID;
 		this.ACCOUNT_TYPE = ACCOUNT_TYPE;
 		this.validCommands = new ArrayList<>();
+		this.validCommands.add(currentState());
 
+	}
+
+	public static String capitalizeFirstLetter(String str) {
+		return str.substring(0, 1).toUpperCase() + str.substring(1);
 	}
 
 	public double getBalance() {
@@ -113,8 +118,8 @@ public abstract class Account {
 		DecimalFormat decimalFormat = new DecimalFormat("0.00");
 		decimalFormat.setRoundingMode(RoundingMode.FLOOR);
 		String myString;
-		myString = getAccountType() + " " + getUNIQUE_ID() + " " + decimalFormat.format(getBalance()) + " "
-				+ decimalFormat.format(getAPR());
+		myString = capitalizeFirstLetter(getAccountType()) + " " + getUNIQUE_ID() + " "
+				+ decimalFormat.format(getBalance()) + " " + decimalFormat.format(getAPR());
 
 		return myString;
 	}
