@@ -25,6 +25,10 @@ public abstract class Account {
 		return balance;
 	}
 
+	void setBalance(double amount) {
+		balance = amount;
+	}
+
 	public double getAPR() {
 		return APR;
 
@@ -75,5 +79,9 @@ public abstract class Account {
 	}
 
 	public void calculateApr(int months) {
+		double decimalAprPerMonth = getAPR() / 100 / 12;
+		double newBalance = (getBalance() * decimalAprPerMonth) + getBalance();
+
+		setBalance(newBalance);
 	}
 }

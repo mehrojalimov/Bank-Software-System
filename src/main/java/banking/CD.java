@@ -25,4 +25,15 @@ public class CD extends Account {
 	public double getTransferAmount(double amount) {
 		return 0;
 	}
+
+	@Override
+	public void calculateApr(int months) {
+		double decimalAprPerMonth = getAPR() / 100 / 12;
+		for (int z = 0; z < months; z++) {
+			for (int i = 0; i < 4; i++) {
+				double newBalance = (getBalance() * decimalAprPerMonth) + getBalance();
+				setBalance(newBalance);
+			}
+		}
+	}
 }

@@ -27,6 +27,9 @@ public class CommandProcessor {
 		case "transfer":
 			new TransferCommandProcessor(bank).processCommand(parts);
 			break;
+		case "pass":
+			new PassTimeProcessor(bank).processCommand(parts);
+			break;
 		}
 	}
 }
