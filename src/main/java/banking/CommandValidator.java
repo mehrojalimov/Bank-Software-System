@@ -16,6 +16,7 @@ public class CommandValidator {
 		DepositCommandValidator deposit;
 		WithdrawCommandValidator withdraw;
 		TransferCommandValidator transfer;
+		PassTimeValidator passTimeValidator;
 
 		switch (accountCommand) {
 		case "create":
@@ -30,6 +31,9 @@ public class CommandValidator {
 		case "transfer":
 			transfer = new TransferCommandValidator(bank);
 			return transfer.validateCommand(parts);
+		case "pass":
+			passTimeValidator = new PassTimeValidator(bank);
+			return passTimeValidator.validateCommand(parts);
 		}
 		return false;
 

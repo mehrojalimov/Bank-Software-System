@@ -209,4 +209,11 @@ public class TransferCommandValidatorTest {
 		assertTrue(actual);
 	}
 
+	@Test
+	void transferring_to_the_same_account_is_invalid() {
+		boolean actual = commandValidator.validate("transfer 11111111 11111111 120");
+
+		assertFalse(actual);
+	}
+
 }

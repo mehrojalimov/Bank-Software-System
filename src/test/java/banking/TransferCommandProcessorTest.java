@@ -82,7 +82,7 @@ public class TransferCommandProcessorTest {
 	}
 
 	@Test
-	void transferring_more_than_what_si_in_balance_will_transfer_only_existing_money() {
+	void transferring_more_than_what_is_in_balance_will_transfer_only_existing_money() {
 		commandProcessor.process("transfer 11111111 22222222 900");
 
 		double actual = bank.retrieveAccount(11111111).getBalance();
@@ -91,4 +91,16 @@ public class TransferCommandProcessorTest {
 		assertEquals(0, actual);
 		assertEquals(1500, actual2);
 	}
+
+	@Test
+	void transferring_zero_dollars_will_not_change_the_accounts_amounts() {
+		commandProcessor.process("transfer 44444444 22222222 0");
+
+		double actual = bank.retrieveAccount(44444444).getBalance();
+		double actual2 = bank.retrieveAccount(22222222).getBalance();
+
+		assertEquals(900, actual);
+		assertEquals(700, actual2);
+	}
+
 }

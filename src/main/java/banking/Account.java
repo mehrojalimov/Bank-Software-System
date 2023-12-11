@@ -6,6 +6,7 @@ public abstract class Account {
 	private final int UNIQUE_ID;
 	private final String ACCOUNT_TYPE;
 	private double balance;
+	private int PASS_TIME = 0;
 
 	public Account(String ACCOUNT_TYPE, int UNIQUE_ID, double APR) {
 		this.APR = APR;
@@ -64,4 +65,12 @@ public abstract class Account {
 	public abstract boolean acceptsTransfer();
 
 	public abstract double getTransferAmount(double amount);
+
+	public int getPassTime() {
+		return PASS_TIME;
+	}
+
+	public void setPassTime(int TIME) {
+		PASS_TIME += TIME;
+	}
 }
