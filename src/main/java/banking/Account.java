@@ -80,8 +80,10 @@ public abstract class Account {
 
 	public void calculateApr(int months) {
 		double decimalAprPerMonth = getAPR() / 100 / 12;
-		double newBalance = (getBalance() * decimalAprPerMonth) + getBalance();
 
-		setBalance(newBalance);
+		for (int z = 0; z < months; z++) {
+			double newBalance = (getBalance() * decimalAprPerMonth) + getBalance();
+			setBalance(newBalance);
+		}
 	}
 }

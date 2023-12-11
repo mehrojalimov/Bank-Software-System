@@ -68,12 +68,14 @@ public class WithdrawCommandValidatorTest {
 
 	@Test
 	void withdrawing_full_amount_from_cd_is_valid() {
+		bank.retrieveAccount(88888888).setPassTime(12);
 		boolean actual = commandValidator.validate("withdraw 88888888 5000");
 		assertTrue(actual);
 	}
 
 	@Test
 	void withdrawing_over_full_amount_of_cd_accounts_is_valid() {
+		bank.retrieveAccount(88888888).setPassTime(13);
 		boolean actual = commandValidator.validate("withdraw 88888888 6000");
 		assertTrue(actual);
 	}

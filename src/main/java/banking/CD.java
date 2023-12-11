@@ -8,7 +8,11 @@ public class CD extends Account {
 
 	@Override
 	public boolean isInMaxWithdrawLimit(double amount) {
-		return amount >= getBalance();
+		if (getPassTime() >= 12) {
+			return amount >= getBalance();
+		} else {
+			return false;
+		}
 	}
 
 	@Override
