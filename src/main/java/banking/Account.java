@@ -73,4 +73,7 @@ public abstract class Account {
 	public void setPassTime(int TIME) {
 		PASS_TIME += TIME;
 	}
+
+	public void calculateApr(int months) {
+	}
 }

@@ -44,4 +44,20 @@ public class Bank {
 	public boolean accountExistsByUniqueID(int quickId) {
 		return accounts.get(quickId) != null;
 	}
+
+	public void passTime(int months) {
+		for (Account account : accounts.values()) {
+			if (account.getBalance() == 0) {
+				accounts.remove(account.getUNIQUE_ID());
+				continue;
+			}
+
+			if (account.getBalance() < 100) {
+				account.withdraw(25);
+			}
+
+			account.calculateApr(months);
+			account.setPassTime(months);
+		}
+	}
 }
