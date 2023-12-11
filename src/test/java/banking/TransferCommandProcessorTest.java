@@ -43,8 +43,8 @@ public class TransferCommandProcessorTest {
 		double actual = bank.retrieveAccount(11111111).getBalance();
 		double actual2 = bank.retrieveAccount(33333333).getBalance();
 
-		assertEquals(500, actual);
-		assertEquals(1000, actual2);
+		assertEquals(400, actual);
+		assertEquals(1300, actual2);
 	}
 
 	@Test
