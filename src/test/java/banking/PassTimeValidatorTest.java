@@ -51,4 +51,39 @@ public class PassTimeValidatorTest {
 		assertTrue(actual);
 	}
 
+	@Test
+	void passing_without_time_given_is_invalid() {
+		boolean actual = commandValidator.validate("pass ");
+
+		assertFalse(actual);
+	}
+
+	@Test
+	void passing_just_the_number_is_invalid() {
+		boolean actual = commandValidator.validate("1");
+
+		assertFalse(actual);
+	}
+
+	@Test
+	void pass_time_command_with_typo_is_invalid() {
+		boolean actual = commandValidator.validate("pas 6");
+
+		assertFalse(actual);
+	}
+
+	@Test
+	void pass_time_command_changed_in_order_is_invalid() {
+		boolean actual = commandValidator.validate("7 Pass");
+
+		assertFalse(actual);
+	}
+
+	@Test
+	void pass_time_command_with_an_extra_number_is_invalid() {
+		boolean actual = commandValidator.validate("pass 7 7");
+
+		assertFalse(actual);
+	}
+
 }
