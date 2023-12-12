@@ -76,4 +76,11 @@ public class WithdrawCommandProcessorTest {
 		assertEquals(900, bank.retrieveAccount(22222222).getBalance());
 	}
 
+	@Test
+	void withdraw_from_the_cd_exactly_as_its_value_is_valid() {
+		commandProcessor.process("withdraw 33333333 2000");
+
+		assertEquals(0, bank.retrieveAccount(33333333).getBalance());
+	}
+
 }

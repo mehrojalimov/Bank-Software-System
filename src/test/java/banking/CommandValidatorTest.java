@@ -274,4 +274,21 @@ public class CommandValidatorTest {
 
 		assertFalse(actual);
 	}
+
+	@Test
+	void depositing_2500_into_saving_is_valid() {
+		bank.addSavingAccount(11111111, 2.6);
+
+		boolean actual = commandValidator.validate("deposit 11111111 2500");
+		assertTrue(actual);
+	}
+
+	@Test
+	void depositing_0_into_saving_is_valid() {
+		bank.addSavingAccount(11111111, 2.3);
+
+		boolean actual = commandValidator.validate("deposit 11111111 0");
+
+		assertTrue(actual);
+	}
 }
