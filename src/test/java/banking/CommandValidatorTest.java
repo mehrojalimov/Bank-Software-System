@@ -291,4 +291,11 @@ public class CommandValidatorTest {
 
 		assertTrue(actual);
 	}
+
+	@Test
+	void depositing_100_into_an_account_that_non_exists_is_invalid() {
+		boolean actual = commandValidator.validate("deposit 11111116 150");
+
+		assertFalse(actual);
+	}
 }
