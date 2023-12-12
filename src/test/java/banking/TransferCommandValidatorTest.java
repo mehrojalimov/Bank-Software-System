@@ -224,4 +224,12 @@ public class TransferCommandValidatorTest {
 		assertFalse(actual);
 	}
 
+	@Test
+	void transferring_from_cd_to_saving_one_is_invalid() {
+		bank.addCDAccount(33333331, 3.3, 0);
+		boolean actual = commandValidator.validate("transfer 33333331 11111111 0");
+
+		assertFalse(actual);
+	}
+
 }
