@@ -298,4 +298,17 @@ public class CommandValidatorTest {
 
 		assertFalse(actual);
 	}
+
+	@Test
+	void creating_accounts_with_different_aprs() {
+		boolean actual = commandValidator.validate("create saving 11111111 10");
+		boolean actual1 = commandValidator.validate("create saving 11111112 0");
+		boolean actual2 = commandValidator.validate("create saving 11111113 11");
+		boolean actual3 = commandValidator.validate("create saving 11111114 -1");
+
+		assertTrue(actual);
+		assertTrue(actual1);
+		assertFalse(actual2);
+		assertFalse(actual3);
+	}
 }
