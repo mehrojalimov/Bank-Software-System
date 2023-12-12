@@ -266,4 +266,12 @@ public class CommandValidatorTest {
 
 		assertFalse(actual);
 	}
+
+	@Test
+	void depositing_with_wrong_id_is_invalid() {
+
+		boolean actual = commandValidator.validate("deposit 1111111a 50");
+
+		assertFalse(actual);
+	}
 }

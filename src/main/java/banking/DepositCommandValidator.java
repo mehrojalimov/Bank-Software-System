@@ -12,7 +12,11 @@ public class DepositCommandValidator extends CommandValidator {
 	}
 
 	private int getAccountId(String uniqueId) {
-		return Integer.parseInt(uniqueId);
+		try {
+			return Integer.parseInt(uniqueId);
+		} catch (NumberFormatException e) {
+			return -1;
+		}
 	}
 
 	private boolean isInDepositLimit(String uniqueId, String depositAmountStr) {
@@ -25,7 +29,7 @@ public class DepositCommandValidator extends CommandValidator {
 
 				return account.isInMaxDepositLimit(depositAmount);
 			}
-		} catch (NumberFormatException e) {
+		} catch (Exception e) {
 			return false;
 		}
 
