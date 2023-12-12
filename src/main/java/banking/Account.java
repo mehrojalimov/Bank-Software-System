@@ -56,13 +56,13 @@ public abstract class Account {
 	}
 
 	public void deposit(double amount) {
-		if (amount >= 0) {
+		if (amount > 0) {
 			balance += amount;
 		}
 	}
 
 	public void withdraw(double amount) {
-		if (amount >= 0) {
+		if (amount > 0) {
 			balance -= amount;
 			if (balance < 0) {
 				balance = 0;
