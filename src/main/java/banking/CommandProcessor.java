@@ -33,6 +33,8 @@ public class CommandProcessor {
 		case "pass":
 			new PassTimeProcessor(bank).processCommand(parts);
 			break;
+		default:
+			break;
 		}
 	}
 }

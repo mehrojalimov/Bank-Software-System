@@ -98,11 +98,5 @@ public class BankTest {
         assertEquals(5000, actual);
     }
 
-    @Test
-    void when_passTime_is_processed_the_accounts_with_less_than_100_will_be_reduced_by_25() {
-        createAccounts();
-
-
-    }
 
 }

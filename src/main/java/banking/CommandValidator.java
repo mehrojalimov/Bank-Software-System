@@ -34,8 +34,9 @@ public class CommandValidator {
 		case "pass":
 			passTimeValidator = new PassTimeValidator(bank);
 			return passTimeValidator.validateCommand(parts);
+		default:
+			return false;
 		}
-		return false;
 
 	}
 }
