@@ -128,4 +128,24 @@ public class AccountsTest {
 
 		assertEquals(100, actual);
 	}
+
+	@Test
+	void withdrawin_over_the_limit_will_make_the_balance_0() {
+		checking.deposit(5);
+		checking.withdraw(10);
+
+		double actual = checking.getBalance();
+
+		assertEquals(0, actual);
+	}
+
+	@Test
+	void depositing_100_into_checking() {
+		checking.deposit(100);
+
+		double actual = checking.getBalance();
+
+		assertEquals(100, actual);
+	}
+
 }
