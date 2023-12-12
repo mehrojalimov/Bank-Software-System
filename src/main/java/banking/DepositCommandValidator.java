@@ -7,21 +7,17 @@ public class DepositCommandValidator extends CommandValidator {
 	}
 
 	public boolean validateCommand(String[] parts) {
-		return parts.length == 3 && bank.accountExistsByUniqueID(getAccountId(parts[1]))
-				&& isInDepositLimit(parts[1], parts[2]);
-	}
-
-	private int getAccountId(String uniqueId) {
 		try {
-			return Integer.parseInt(uniqueId);
-		} catch (NumberFormatException e) {
-			return -1;
+			return parts.length == 3 && bank.accountExistsByUniqueID(Integer.parseInt(parts[1]))
+					&& isInDepositLimit(parts[1], parts[2]);
+		} catch (Exception e) {
+			return false;
 		}
 	}
 
 	private boolean isInDepositLimit(String uniqueId, String depositAmountStr) {
 		try {
-			int accountId = getAccountId(uniqueId);
+			int accountId = Integer.parseInt(uniqueId);
 			Account account = bank.retrieveAccount(accountId);
 
 			if (account != null) {
