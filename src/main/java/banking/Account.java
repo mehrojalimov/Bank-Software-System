@@ -14,7 +14,7 @@ public abstract class Account {
 	protected double balance;
 	protected int LAST_WITHDRAW_MONTH = -1;
 
-	public Account(String ACCOUNT_TYPE, int UNIQUE_ID, double APR) {
+	protected Account(String ACCOUNT_TYPE, int UNIQUE_ID, double APR) {
 		this.APR = APR;
 		this.UNIQUE_ID = UNIQUE_ID;
 		this.ACCOUNT_TYPE = ACCOUNT_TYPE;
@@ -23,7 +23,7 @@ public abstract class Account {
 		this.passTime = 0;
 	}
 
-	public Account(String ACCOUNT_TYPE, int UNIQUE_ID, double APR, double balance) {
+	protected Account(String ACCOUNT_TYPE, int UNIQUE_ID, double APR, double balance) {
 		this.APR = APR;
 		this.balance = balance;
 		this.UNIQUE_ID = UNIQUE_ID;

@@ -10,7 +10,6 @@ public class CommandValidator {
 
 	public boolean validate(String command) {
 		String[] parts = command.split(" ");
-		String accountCommand = parts[0].toLowerCase();
 
 		CreateCommandValidator create;
 		DepositCommandValidator deposit;
@@ -18,10 +17,10 @@ public class CommandValidator {
 		TransferCommandValidator transfer;
 		PassTimeValidator passTimeValidator;
 
-		switch (accountCommand) {
+		switch (parts[0].toLowerCase()) {
 		case "create":
 			create = new CreateCommandValidator(bank);
-			return create.validateCommand(parts);
+			return returnCreate(create, parts);
 		case "deposit":
 			deposit = new DepositCommandValidator(bank);
 			return deposit.validateCommand(parts);
@@ -37,6 +36,9 @@ public class CommandValidator {
 		default:
 			return false;
 		}
+	}
 
+	public boolean returnCreate(CreateCommandValidator create, String[] parts) {
+		return create.validateCommand(parts);
 	}
 }

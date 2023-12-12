@@ -2,6 +2,7 @@ package banking;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class CommandStorage {
 	private final List<String> invalidCommands;
@@ -30,19 +31,29 @@ public class CommandStorage {
 		return this.invalidCommands;
 	}
 
-	public ArrayList<String> getAccountActivities() {
-		ArrayList<String> doReturn = new ArrayList<>();
-		for (String command : getValidCommands()) {
-			String[] arrayCommand = command.split(" ");
-			if (arrayCommand[0].equalsIgnoreCase("create")) {
-				int uniqueId = Integer.parseInt(arrayCommand[2]);
-				if (bank.accountExistsByUniqueID(uniqueId)) {
-					Account account = this.bank.retrieveAccount(uniqueId);
-					doReturn.addAll(account.getValidCommands());
-				}
+	public List<String> getAccountActivities() {
+		List<String> activities = new ArrayList<>();
+
+		for (String command : getValidCreateCommands()) {
+			int uniqueId = extractUniqueId(command);
+
+			if (bank.accountExistsByUniqueID(uniqueId)) {
+				Account account = bank.retrieveAccount(uniqueId);
+				activities.addAll(account.getValidCommands());
 			}
 		}
-		return doReturn;
+
+		return activities;
+	}
+
+	private List<String> getValidCreateCommands() {
+		return getValidCommands().stream().filter(command -> command.trim().toLowerCase().startsWith("create"))
+				.collect(Collectors.toList());
+	}
+
+	private int extractUniqueId(String command) {
+		String[] arrayCommand = command.split(" ");
+		return Integer.parseInt(arrayCommand[2]);
 	}
 
 	public List<String> getAllActivities() {
